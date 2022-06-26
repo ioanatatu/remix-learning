@@ -1,32 +1,52 @@
-import type { MetaFunction } from "@remix-run/node";
-import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from "@remix-run/react";
-
-export const meta: MetaFunction = () => ({
-  charset: "utf-8",
-  title: "New Remix App",
-  viewport: "width=device-width,initial-scale=1",
-});
+import { LiveReload, Outlet } from '@remix-run/react';
+import { Link } from 'react-router-dom';
 
 export default function App() {
   return (
+    <Document>
+      <Layout>
+        <Outlet />
+      </Layout>
+    </Document>
+  );
+}
+
+type DocumentProps = {
+  title?: string;
+  children: React.ReactNode;
+};
+function Document({ children, title }: DocumentProps) {
+  return (
     <html lang="en">
       <head>
-        <Meta />
-        <Links />
+        <title>{title ? title : 'My remix learning app'}</title>
       </head>
       <body>
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
+        {children}
+        {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
       </body>
     </html>
+  );
+}
+
+type LayoutProps = {
+  children: React.ReactNode;
+};
+function Layout({ children }: LayoutProps): JSX.Element {
+  return (
+    <>
+      <nav className="navbar">
+        <Link to="/" className="logo">
+          Remix
+        </Link>
+        <ul className="nav">
+          <li>
+            <Link to="/posts">Posts</Link>
+          </li>
+        </ul>
+      </nav>
+
+      <div className="container">{children}</div>
+    </>
   );
 }

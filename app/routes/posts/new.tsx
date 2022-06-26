@@ -10,7 +10,7 @@ export const action = async ({ request }) => {
 
   console.log(fields);
   // TODO: submit to database
-  return redirect('/posts');
+  // return redirect('/posts');
 };
 
 function NewPost() {

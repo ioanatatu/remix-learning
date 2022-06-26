@@ -61,3 +61,15 @@ function Layout({ children }: LayoutProps): JSX.Element {
     </>
   );
 }
+
+export function ErrorBoundary({ error }) {
+  console.log(error);
+  return (
+    <Document>
+      <Layout>
+        <h1>Error</h1>
+        <p>{error.message}</p>
+      </Layout>
+    </Document>
+  );
+}

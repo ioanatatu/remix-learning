@@ -25,10 +25,13 @@ const PostItems = () => {
     <>
       <div className="page-header">
         <h1>Posts</h1>
+        <Link to="/posts/new" className="btn">
+          new post
+        </Link>
       </div>
       <ul className="posts-list">
         {posts.map((post: { id: string; title: string; body: string }) => (
-          <li key={posts.id}>
+          <li key={post.id}>
             <Link to={post.id}>
               <h3>{post.title}</h3>
             </Link>

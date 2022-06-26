@@ -1,5 +1,14 @@
-import { LiveReload, Outlet } from '@remix-run/react';
+import { LiveReload, Outlet, Links, Meta } from '@remix-run/react';
 import { Link } from 'react-router-dom';
+import globalStylesUrl from './styles/global.css';
+
+export const links = () => [{ rel: 'stylesheet', href: globalStylesUrl }];
+export const meta = () => {
+  const description = 'A learning exercise for remix';
+  const keywords = 'remix, react javascript';
+
+  return { description, keywords };
+};
 
 export default function App() {
   return (
@@ -19,6 +28,8 @@ function Document({ children, title }: DocumentProps) {
   return (
     <html lang="en">
       <head>
+        <Links />
+        <Meta />
         <title>{title ? title : 'My remix learning app'}</title>
       </head>
       <body>
